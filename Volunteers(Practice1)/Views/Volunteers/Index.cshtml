@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Volunteers_Practice1_.Models.Volunteer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>All Volunteers</h1>
+
+
+
+    <div class="btn-group mb-3">
+        <a type="button" class="btn btn-outline-success" asp-action="Create">Add New+</a>
+        <a type="button" class="btn btn-outline-primary ml-3" asp-action="#">Opportunity matches</a>
+        <button type="button" class="btn btn-outline-primary ml-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filter
+        </button>
+        <div class="dropdown-menu">
+            <a type="button" class="dropdown-item" asp-action="ShowApprovedPending">Approved/Pending Approal</a>
+            <a type="button" class="dropdown-item" asp-action="ShowApproved">Approved</a>
+            <a type="button" class="dropdown-item" asp-action="ShowPending">Pending Approval</a>
+            <a type="button" class="dropdown-item" asp-action="ShowDisapproved">Disapproved</a>
+            <a type="button" class="dropdown-item" asp-action="#">Inactive</a>
+            <div class="dropdown-divider"></div>
+            <a type="button" class="dropdown-item"  asp-action="Index">All</a>
+        </div>
+        <form class="ml-3" asp-action="ShowSearchResults">
+            <div class="form-row align-items-center">
+                <div class="">
+                    <label class="sr-only" for="SearchPhrase"></label>
+                    <input name="SearchPhrase" class="form-control" id="inlineFormInputName" placeholder="Name">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" value="Search" class="btn  btn-outline-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table table-responsive-md">
+            <thead>
+                <tr>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.firstName)*@First Name
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.lastName)*@Last Name
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.userName)*@UserName
+                    </th>
+                    <th>
+                        @* @Html.DisplayNameFor(model => model.preferences)*@Preferences
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.email)*@Email
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.approvalStatus)*@Approval status
+                    </th>
+                    <!--<th>-->
+                        @* @Html.DisplayNameFor(model => model.activeStatus)*@<!--Active
+                    </th>-->
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table table-striped">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.firstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.lastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.userName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.preferences)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.approvalStatus)
+                        </td>@*
+                        <td>
+                            @Html.DisplayFor(modelItem => item.activeStatus)
+                        </td>*@
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> | 
+                            <a asp-action="Opportunities" asp-route-id="@item.Id">Opportunities</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+@*<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $(".dropdown-menu li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>*@
+@*<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+        Filter
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">vApproved/Pending Approal</a></li>
+        <li><a href="#">Approved</a></li>
+        <li><a href="#">Pending Approval</a></li>
+        <li><a href="#">Disapproved</a></li>
+        <li><a href="#">Inactive</a></li>
+        <li><a href="#">All</a></li>
+    </ul>*@
